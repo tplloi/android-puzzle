@@ -1,16 +1,16 @@
 package com.example.slidepuzzle.ui.boardoptions
 
 import `in`.srain.cube.views.GridViewWithHeaderAndFooter
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import com.example.slidepuzzle.R
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.view.*
 import android.widget.*
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.example.slidepuzzle.BoardActivityParams
 import com.example.slidepuzzle.GameActivity
 import android.view.LayoutInflater
@@ -47,7 +47,7 @@ class ImageCardsAdapterGridView(
     }
 }
 
-class BoardOptionsFragment : Fragment() {
+class BoardOptionsFragment : androidx.fragment.app.Fragment() {
     companion object {
         fun newInstance() = BoardOptionsFragment()
     }

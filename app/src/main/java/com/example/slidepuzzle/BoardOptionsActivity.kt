@@ -1,6 +1,6 @@
 package com.example.slidepuzzle
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.slidepuzzle.ui.boardoptions.BoardOptionsFragment
 

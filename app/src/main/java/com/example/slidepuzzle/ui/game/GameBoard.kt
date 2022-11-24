@@ -3,15 +3,13 @@ package com.example.slidepuzzle.ui.game
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.util.Size
 import android.view.View
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import com.example.slidepuzzle.R
-import com.example.slidepuzzle.ui.boardoptions.BoardOptionsViewModel
 import com.example.slidepuzzle.ui.game.state.PuzzleGrid
 
 class GameBoard(context: Context, attrs: AttributeSet) : View(context, attrs) {
@@ -86,8 +84,8 @@ class GameBoard(context: Context, attrs: AttributeSet) : View(context, attrs) {
                 )
                 invalidate()
             }
-            addListener(object: AnimatorListenerAdapter() {
-                override fun onAnimationEnd(animation: Animator?) {
+            addListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
                     animator = null
                     grid.moveSlide(p)?.let { newCoordinates ->
                         activeSlide = newCoordinates
@@ -109,7 +107,8 @@ class GameBoard(context: Context, attrs: AttributeSet) : View(context, attrs) {
                 0,
                 0,
                 Math.ceil(MeasureSpec.getSize(widthMeasureSpec).toDouble() / it.size.width).toInt(),
-                Math.ceil(MeasureSpec.getSize(heightMeasureSpec).toDouble() / it.size.height).toInt()
+                Math.ceil(MeasureSpec.getSize(heightMeasureSpec).toDouble() / it.size.height)
+                    .toInt()
             )
         }
     }
@@ -139,11 +138,12 @@ class GameBoard(context: Context, attrs: AttributeSet) : View(context, attrs) {
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
-        for(j in 0 until grid.size.height) {
+        for (j in 0 until grid.size.height) {
             for (i in 0 until grid.size.width) {
                 val puzzle = grid.puzzles[j][i]
                 puzzle?.let {
-                    val active = ::activeSlide.isInitialized && activeSlide.x == i && activeSlide.y == j
+                    val active =
+                        ::activeSlide.isInitialized && activeSlide.x == i && activeSlide.y == j
 
                     val x = i * tileSize.width()
                     val y = j * tileSize.height()
